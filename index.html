@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b090a">
+  <meta name="description" content="Tensai — тёмный мир, где каждая легенда написана кровью.">
+  <title>TENSAI — легенда, написанная кровью</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+    :root {
+      color-scheme: dark;
+      --ink: #0b090a;
+      --paper: #e8e0da;
+      --muted: #a29a97;
+      --red: #b51627;
+      --bright-red: #ed2436;
+      --line: rgba(232, 224, 218, .14);
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Manrope", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    ::selection { background: var(--red); color: white; }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 760px;
+      min-height: 100svh;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(10, 8, 9, .98) 0%, rgba(10, 8, 9, .82) 34%, rgba(10, 8, 9, .18) 72%, rgba(10, 8, 9, .35) 100%),
+        linear-gradient(0deg, #0b090a 0%, transparent 33%, rgba(9, 7, 8, .2) 100%),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2200&q=85") center 46% / cover;
+    }
+    .hero::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      background:
+        radial-gradient(ellipse at 73% 42%, rgba(176, 15, 32, .23), transparent 31%),
+        linear-gradient(115deg, transparent 58%, rgba(0, 0, 0, .38));
+      pointer-events: none;
+    }
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      right: 10%;
+      bottom: -35%;
+      width: min(42vw, 620px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(151, 16, 30, .22);
+      filter: blur(110px);
+      content: "";
+    }
+    .site-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1320px, calc(100% - 96px));
+      margin: 0 auto;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .16);
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+    .brand span { color: var(--bright-red); }
+    .nav {
+      display: flex;
+      gap: 42px;
+      align-items: center;
+      color: rgba(244, 237, 232, .78);
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .nav a { transition: color .2s ease; }
+    .nav a:hover { color: #fff; }
+    .header-mark {
+      color: rgba(244, 237, 232, .58);
+      font-size: 10px;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+    .hero-content {
+      width: min(1320px, calc(100% - 96px));
+      margin: 0 auto;
+      padding: clamp(115px, 17vh, 195px) 0 110px;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      color: #e24a55;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 35px;
+      height: 1px;
+      background: var(--bright-red);
+      content: "";
+    }
+    h1 {
+      max-width: 790px;
+      margin: 24px 0 14px;
+      font-family: var(--serif);
+      font-size: clamp(100px, 17vw, 220px);
+      font-weight: 500;
+      letter-spacing: .025em;
+      line-height: .75;
+    }
+    .hero-subtitle {
+      margin: 36px 0 0;
+      color: rgba(237, 228, 223, .8);
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 37px);
+      font-style: italic;
+    }
+    .hero-copy {
+      max-width: 420px;
+      margin: 17px 0 34px;
+      color: #b4aaa6;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; }
+    .button {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 24px;
+      border: 1px solid rgba(232, 224, 218, .34);
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); border-color: var(--bright-red); }
+    .button-primary { border-color: var(--red); background: var(--red); }
+    .button-primary:hover { background: #d11d30; }
+    .play-icon {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: 50%;
+      font-size: 9px;
+    }
+    .hero-note {
+      position: absolute;
+      right: 48px;
+      bottom: 46px;
+      color: rgba(232, 224, 218, .6);
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .hero-index {
+      position: absolute;
+      bottom: 48px;
+      left: max(48px, calc((100% - 1320px) / 2));
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: rgba(232, 224, 218, .55);
+      font-size: 9px;
+      letter-spacing: .2em;
+    }
+    .hero-index::before { width: 48px; height: 1px; background: var(--red); content: ""; }
+
+    .section { padding: 128px 0; }
+    .container { width: min(1120px, calc(100% - 96px)); margin: 0 auto; }
+    .story {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .section-label {
+      color: #d24751;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 16px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(47px, 6vw, 76px);
+      font-weight: 500;
+      line-height: .98;
+    }
+    .story-copy { padding-top: 33px; }
+    .story-copy p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2;
+    }
+    .story-copy .dropcap::first-letter {
+      float: left;
+      margin: 5px 11px 0 0;
+      color: var(--bright-red);
+      font-family: var(--serif);
+      font-size: 62px;
+      line-height: .7;
+    }
+    .world {
+      position: relative;
+      overflow: hidden;
+      padding: 115px 0 130px;
+      background:
+        linear-gradient(90deg, rgba(10, 8, 9, .94), rgba(10, 8, 9, .67)),
+        url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2000&q=85") center / cover;
+    }
+    .world-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 46px;
+    }
+    .world-heading h2 { max-width: 520px; }
+    .world-heading p {
+      max-width: 270px;
+      margin: 0 0 5px;
+      color: #b6aaa6;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+    .world-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .world-card {
+      min-height: 220px;
+      padding: 27px 30px 30px 0;
+    }
+    .world-card + .world-card { padding-left: 30px; border-left: 1px solid var(--line); }
+    .card-number { color: #e34b55; font-family: var(--serif); font-size: 20px; }
+    .world-card h3 {
+      margin: 27px 0 12px;
+      font-family: var(--serif);
+      font-size: 31px;
+      font-weight: 500;
+    }
+    .world-card p { max-width: 290px; margin: 0; color: #a69b97; font-size: 12px; line-height: 1.8; }
+
+    .closing { padding: 122px 24px 128px; text-align: center; }
+    .closing h2 { max-width: 760px; margin: 20px auto 17px; }
+    .closing p { margin: 0 auto 30px; color: var(--muted); font-size: 13px; }
+    .site-footer {
+      display: flex;
+      width: min(1320px, calc(100% - 96px));
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      padding: 27px 0 32px;
+      border-top: 1px solid var(--line);
+      color: #8a817e;
+      font-size: 10px;
+      letter-spacing: .1em;
+    }
+    .footer-brand { color: var(--paper); font-family: var(--serif); font-size: 20px; letter-spacing: .15em; }
+    .footer-brand span { color: var(--bright-red); }
+    .modal {
+      position: fixed;
+      z-index: 10;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, .86);
+      backdrop-filter: blur(8px);
+    }
+    .modal.is-open { display: flex; }
+    .modal-content {
+      position: relative;
+      width: min(620px, 100%);
+      padding: 70px 45px;
+      border: 1px solid rgba(237, 36, 54, .45);
+      background: #110d0e;
+      text-align: center;
+    }
+    .modal-content p { color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      border: 0;
+      background: transparent;
+      color: var(--paper);
+      cursor: pointer;
+      font-size: 25px;
+    }
+    @media (max-width: 760px) {
+      .hero { min-height: 740px; min-height: 100svh; background-position: 58% center; }
+      .site-header, .hero-content, .site-footer { width: calc(100% - 40px); }
+      .site-header { padding: 23px 0; }
+      .nav { gap: 18px; font-size: 9px; }
+      .nav a:nth-child(2) { display: none; }
+      .header-mark { display: none; }
+      .hero-content { padding-top: 21vh; }
+      h1 { font-size: clamp(92px, 25vw, 150px); }
+      .hero-copy { max-width: 340px; }
+      .hero-note { right: 17px; bottom: 28px; }
+      .hero-index { bottom: 30px; left: 20px; }
+      .section { padding: 86px 0; }
+      .container { width: calc(100% - 40px); }
+      .story { grid-template-columns: 1fr; gap: 15px; }
+      .story-copy { padding-top: 8px; }
+      .world { padding: 85px 0; }
+      .world-heading { display: block; }
+      .world-heading p { margin-top: 22px; }
+      .world-grid { grid-template-columns: 1fr; }
+      .world-card, .world-card + .world-card { min-height: unset; padding: 24px 0; border-left: 0; }
+      .world-card + .world-card { border-top: 1px solid var(--line); }
+      .world-card h3 { margin-top: 15px; }
+      .closing { padding: 90px 20px; }
+      .site-footer { gap: 16px; flex-wrap: wrap; font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" id="home">
+      <header class="site-header">
+        <a class="brand" href="#home" aria-label="Tensai — на главную">TEN<span>.</span>SAI</a>
+        <nav class="nav" aria-label="Основная навигация">
+          <a href="#story">Легенда</a>
+          <a href="#world">Мир</a>
+          <a href="#contact">Контакт</a>
+          <a href="index2.html">Продолжение <span aria-hidden="true">↗</span></a>
+        </nav>
+        <span class="header-mark">Тьма помнит всё</span>
+      </header>
+
+      <div class="hero-content">
+        <div class="eyebrow">Новая тёмная легенда</div>
+        <h1>TENSAI</h1>
+        <p class="hero-subtitle">Легенда, написанная кровью.</p>
+        <p class="hero-copy">Там, где гаснет последний свет, начинается путь. Шагни навстречу тьме — и узнай, кем ты станешь.</p>
+        <div class="actions">
+          <a class="button button-primary" href="#story">Войти в легенду <span aria-hidden="true">↗</span></a>
+          <button class="button" type="button" id="open-modal"><span class="play-icon" aria-hidden="true">▶</span> Смотреть тизер</button>
+        </div>
+      </div>
+      <span class="hero-index">01 &nbsp; / &nbsp; 03</span>
+      <span class="hero-note">Держись света, пока он есть</span>
+    </section>
+
+    <section class="section" id="story">
+      <div class="container story">
+        <div>
+          <div class="section-label">01 — Легенда</div>
+          <h2>У каждой<br>тени есть<br>имя.</h2>
+        </div>
+        <div class="story-copy">
+          <p class="dropcap">В забытых землях ночь длится дольше, чем память. Старые кланы исчезли, храмы опустели, а за красной луной проснулись те, кого считали лишь сказкой.</p>
+          <p>Здесь сила не даётся даром. Каждый выбор оставляет след, каждый союз проверяется страхом. И только тебе решать, что останется от мира на рассвете.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="world" id="world">
+      <div class="container">
+        <div class="world-heading">
+          <div>
+            <div class="section-label">02 — Мир Tensai</div>
+            <h2>Красота на<br>краю гибели.</h2>
+          </div>
+          <p>Путешествие сквозь земли, где древние легенды оживают в багровом свете.</p>
+        </div>
+        <div class="world-grid">
+          <article class="world-card">
+            <span class="card-number">一</span>
+            <h3>Алый лес</h3>
+            <p>Тропа исчезает за спиной. Не всякий шёпот здесь принадлежит ветру.</p>
+          </article>
+          <article class="world-card">
+            <span class="card-number">二</span>
+            <h3>Забытый храм</h3>
+            <p>Молитвы давно стихли, но древние боги всё ещё слышат шаги.</p>
+          </article>
+          <article class="world-card">
+            <span class="card-number">三</span>
+            <h3>Кровавая луна</h3>
+            <p>Когда она поднимается, граница между мифом и явью исчезает.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" id="contact">
+      <div class="section-label">03 — Твой выбор</div>
+      <h2>Тьма уже знает твоё имя.</h2>
+      <p>История начинается с одного шага.</p>
+      <a class="button button-primary" href="index2.html">Продолжить историю <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="#home">TEN<span>.</span>SAI</a>
+    <span>Мир, где легенды оставляют шрамы.</span>
+    <span>© 2026 TENSAI PROJECT</span>
+  </footer>
+
+  <div class="modal" id="teaser-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <button class="modal-close" type="button" id="close-modal" aria-label="Закрыть">×</button>
+      <div class="section-label">Тизер</div>
+      <h2 id="modal-title">Ночь только начинается.</h2>
+      <p>Тизер скоро появится. Пока прислушайся: в тишине уже звучат первые шаги.</p>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("teaser-modal");
+    const openButton = document.getElementById("open-modal");
+    const closeButton = document.getElementById("close-modal");
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      openButton.focus();
+    }
+
+    openButton.addEventListener("click", () => {
+      modal.classList.add("is-open");
+      closeButton.focus();
+    });
+    closeButton.addEventListener("click", closeModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+    });
+  </script>
+</body>
+</html>

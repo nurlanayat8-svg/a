@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b090a">
+  <meta name="description" content="Финальная глава легенды Tensai. Последний выбор решит судьбу мира.">
+  <title>TENSAI — Глава III: Рассвет без имени</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+    :root {
+      color-scheme: dark;
+      --ink: #0b090a;
+      --paper: #e8e0da;
+      --muted: #a29a97;
+      --red: #b51627;
+      --bright-red: #ed2436;
+      --line: rgba(232, 224, 218, .14);
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Manrope", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--red); color: white; }
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 690px;
+      min-height: 92svh;
+      flex-direction: column;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(10, 8, 9, .96) 0%, rgba(10, 8, 9, .68) 48%, rgba(10, 8, 9, .14) 100%),
+        linear-gradient(0deg, #0b090a 0%, transparent 34%, rgba(9, 7, 8, .2) 100%),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2200&q=85") center 42% / cover;
+    }
+    .hero::before {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 72% 36%, rgba(178, 17, 34, .34), transparent 26%),
+        linear-gradient(120deg, transparent 55%, rgba(0, 0, 0, .28));
+      content: "";
+      pointer-events: none;
+    }
+    .site-header, .hero-content, .container, .site-footer {
+      position: relative;
+      width: min(1200px, calc(100% - 80px));
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .site-header {
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 29px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .16);
+    }
+    .brand, .footer-brand {
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+    .brand span, .footer-brand span { color: var(--bright-red); }
+    .nav { display: flex; align-items: center; gap: 30px; }
+    .nav a {
+      color: rgba(244, 237, 232, .8);
+      font-size: 10px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+    .nav a:hover { color: white; }
+    .hero-content { z-index: 1; flex: 1; padding-top: clamp(130px, 21vh, 225px); padding-bottom: 100px; }
+    .eyebrow, .section-label {
+      color: #e24a55;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+    }
+    .eyebrow { display: flex; align-items: center; gap: 13px; }
+    .eyebrow::before { width: 35px; height: 1px; background: var(--bright-red); content: ""; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
+    h1 {
+      max-width: 850px;
+      margin: 25px 0 20px;
+      font-size: clamp(75px, 12vw, 150px);
+      letter-spacing: .015em;
+      line-height: .8;
+    }
+    .hero-subtitle {
+      margin: 26px 0 0;
+      color: #c8bbb6;
+      font-family: var(--serif);
+      font-size: clamp(23px, 3vw, 34px);
+      font-style: italic;
+    }
+    .hero-index {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      color: rgba(232, 224, 218, .65);
+      font-size: 9px;
+      letter-spacing: .2em;
+      writing-mode: vertical-rl;
+    }
+    .chapter { padding: 112px 0; }
+    .chapter-intro { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; align-items: start; }
+    h2 { margin: 16px 0 0; font-size: clamp(50px, 7vw, 82px); line-height: .95; }
+    .prose { padding-top: 28px; }
+    .prose p { margin: 0 0 20px; color: var(--muted); font-size: 14px; line-height: 2; }
+    .prose .lead { color: #d4cac5; font-family: var(--serif); font-size: 25px; line-height: 1.5; }
+    .scene {
+      position: relative;
+      overflow: hidden;
+      padding: 130px 0;
+      background:
+        linear-gradient(90deg, rgba(10, 8, 9, .94), rgba(10, 8, 9, .72)),
+        url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2000&q=85") center / cover;
+    }
+    .scene blockquote {
+      max-width: 850px;
+      margin: 0 auto;
+      color: #e4d9d4;
+      font-family: var(--serif);
+      font-size: clamp(31px, 5vw, 54px);
+      font-style: italic;
+      line-height: 1.25;
+      text-align: center;
+    }
+    .scene cite {
+      display: block;
+      margin-top: 27px;
+      color: #e24a55;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-style: normal;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .ending { padding: 112px 0; }
+    .ending-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      margin-top: 45px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .ending-card { min-height: 190px; padding: 28px; background: var(--ink); }
+    .ending-card span { color: #e24a55; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
+    .ending-card h3 { margin: 20px 0 10px; font-size: 31px; }
+    .ending-card p { max-width: 430px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+    .closing { padding: 110px 20px 120px; text-align: center; }
+    .closing h2 { max-width: 760px; margin: 20px auto; }
+    .closing p { margin: 0 auto 30px; color: var(--muted); font-size: 13px; }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 23px;
+      border: 1px solid rgba(232, 224, 218, .34);
+      background: transparent;
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); border-color: var(--bright-red); }
+    .button-primary { border-color: var(--red); background: var(--red); }
+    .button-primary:hover { background: #d11d30; }
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 27px 0 32px;
+      border-top: 1px solid var(--line);
+      color: #8a817e;
+      font-size: 10px;
+      letter-spacing: .1em;
+    }
+    .footer-brand { color: var(--paper); font-size: 20px; }
+    @media (max-width: 700px) {
+      .hero { min-height: 760px; min-height: 100svh; background-position: 58% center; }
+      .site-header, .hero-content, .container, .site-footer { width: calc(100% - 40px); }
+      .site-header { padding: 22px 0; }
+      .nav { gap: 14px; }
+      .nav a { font-size: 8px; }
+      .nav a:nth-child(2) { display: none; }
+      .hero-content { padding-top: 22vh; }
+      h1 { font-size: clamp(72px, 18vw, 120px); }
+      .chapter, .ending { padding: 82px 0; }
+      .chapter-intro { grid-template-columns: 1fr; gap: 10px; }
+      .prose { padding-top: 12px; }
+      .scene { padding: 90px 0; }
+      .ending-grid { grid-template-columns: 1fr; }
+      .closing { padding: 86px 20px; }
+      .site-footer { flex-wrap: wrap; gap: 15px; font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" id="top">
+      <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Вернуться на главную Tensai">TEN<span>.</span>SAI</a>
+        <nav class="nav" aria-label="Навигация">
+          <a href="index.html">Часть I</a>
+          <a href="index2.html">← Часть II</a>
+          <a href="#ending">Финал</a>
+        </nav>
+      </header>
+      <div class="hero-content">
+        <div class="eyebrow">Заключительная глава · Часть III</div>
+        <h1>Рассвет<br>без имени.</h1>
+        <p class="hero-subtitle">Последняя ночь. Последний выбор.</p>
+      </div>
+      <span class="hero-index">03 &nbsp; / &nbsp; 03</span>
+    </section>
+
+    <section class="chapter" id="chapter">
+      <div class="container chapter-intro">
+        <div>
+          <div class="section-label">Глава III — Истина</div>
+          <h2>Тот,<br>кто ждал<br>в тишине.</h2>
+        </div>
+        <div class="prose">
+          <p class="lead">Огонёк привёл тебя к воротам старого города. На камне было вырезано имя — твоё, но забытое.</p>
+          <p>За воротами стоял незнакомец в маске. Он снял её, и красная луна отразилась в его глазах. Лицо было твоим. Не похожим — твоим.</p>
+          <p>Теперь ты понял: лес не охотился на тебя. Он пытался вернуть тебе память. А тот, кто вырезал твоё имя, всё это время шёл рядом.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" aria-label="Последние слова незнакомца">
+      <div class="container">
+        <blockquote>
+          «Ты можешь стать концом этой истории. Или её новым началом».
+          <cite>Незнакомец под красной луной</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="ending" id="ending">
+      <div class="container">
+        <div class="section-label">Финал — Твой выбор</div>
+        <h2>Что останется<br>после рассвета?</h2>
+        <div class="ending-grid">
+          <article class="ending-card">
+            <span>Путь первый</span>
+            <h3>Разорвать круг</h3>
+            <p>Ты отпускаешь прошлое. Луна гаснет, и впервые за много лет над городом занимается утро.</p>
+          </article>
+          <article class="ending-card">
+            <span>Путь второй</span>
+            <h3>Принять тьму</h3>
+            <p>Ты принимаешь силу, которой боялся. Красный свет остаётся — но теперь он подчиняется тебе.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="section-label">Конец первой легенды</div>
+      <h2>Любая история может начаться снова.</h2>
+      <p>Спасибо, что прошёл этот путь вместе с Tensai.</p>
+      <div class="actions">
+        <a class="button button-primary" href="index.html">Вернуться к началу <span aria-hidden="true">↗</span></a>
+        <a class="button" href="index2.html">Перечитать часть II <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="index.html">TEN<span>.</span>SAI</a>
+    <a href="index2.html">← Предыдущая глава</a>
+    <span>© 2026 TENSAI PROJECT</span>
+  </footer>
+</body>
+</html>
